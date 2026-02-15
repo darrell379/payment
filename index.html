@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment DANA</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background: linear-gradient(135deg, #0f2027, #203a43, #000000);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: white;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 40px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(0, 150, 255, 0.4);
+    animation: fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.logo {
+    width: 90px;
+    margin-bottom: 20px;
+    animation: float 3s infinite ease-in-out;
+}
+
+@keyframes float {
+    0%,100% {transform: translateY(0);}
+    50% {transform: translateY(-10px);}
+}
+
+h1 {
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.number {
+    font-size: 22px;
+    letter-spacing: 2px;
+    margin: 15px 0;
+    font-weight: bold;
+}
+
+button {
+    background: linear-gradient(45deg, #00c6ff, #0072ff);
+    border: none;
+    padding: 12px 20px;
+    border-radius: 30px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 150, 255, 0.7);
+}
+
+.success {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #00ffcc;
+    display: none;
+}
+
+.music-btn {
+    margin-top: 20px;
+    background: #111;
+    border: 1px solid #00c6ff;
+}
+
+.footer {
+    margin-top: 20px;
+    font-size: 12px;
+    opacity: 0.7;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Logo_dana_blue.svg" class="logo">
+    
+    <h1>Payment DANA</h1>
+    <p>Kirim ke nomor berikut:</p>
+
+    <div class="number" id="danaNumber">085852774514</div>
+
+    <button onclick="copyNumber()">Copy Nomor</button>
+    <div class="success" id="successMsg">Nomor berhasil disalin!</div>
+
+    <button class="music-btn" onclick="toggleMusic()">Play / Pause Music</button>
+
+    <div class="footer">
+        Terima kasih atas pembayaran Anda 🙏
+    </div>
+</div>
+
+<!-- Embed YouTube Music -->
+<iframe id="musicPlayer" width="0" height="0" 
+src="https://www.youtube.com/embed/5oK1bG5XgC8?enablejsapi=1"
+frameborder="0" allow="autoplay"></iframe>
+
+<script>
+function copyNumber() {
+    const number = document.getElementById("danaNumber").innerText;
+    navigator.clipboard.writeText(number);
+    document.getElementById("successMsg").style.display = "block";
+    setTimeout(() => {
+        document.getElementById("successMsg").style.display = "none";
+    }, 2000);
+}
+
+let player;
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('musicPlayer');
+}
+
+function toggleMusic() {
+    if (player.getPlayerState() == 1) {
+        player.pauseVideo();
+    } else {
+        player.playVideo();
+    }
+}
+
+// Load YouTube API
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+</script>
+
+</body>
+</html>
